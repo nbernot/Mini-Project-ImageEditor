@@ -20,7 +20,7 @@ class ImageOperations {
     }
 
 
-    public static Image crop(Image img, int x1, int y1, int w, int h){
+    public static Image crop(Image, int x1, int y1, int w, int h){
         // TODO.
     }
 
