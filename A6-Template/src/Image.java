@@ -8,7 +8,7 @@ abstract class Image {
     public Image(int width, int height) {
        this.width = width;
        this.height = height;
-       this.pixels = new Color[width][height];
+       this.pixels = new Color[height][width];
     }
     public Image(){
         this(0,0);
@@ -37,3 +37,6 @@ abstract class Image {
 
 
 }
+
+
+

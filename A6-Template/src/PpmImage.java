@@ -5,3 +5,5 @@ class PpmImage extends Image {
         super(width, height);
     }
 }
+
+
