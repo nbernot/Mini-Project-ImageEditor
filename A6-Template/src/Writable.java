@@ -1,3 +1,3 @@
 interface Writable {
-    void writeToFile(String filename);
+    void output(String filename);
 }

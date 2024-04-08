@@ -1,6 +1,8 @@
 import java.awt.*;
+import java.util.Scanner;
+
 // trying to push instead
-abstract class Image {
+abstract class Image implements Writable{
     private int width;
     private int height;
     private Color[][] pixels;
@@ -10,27 +12,37 @@ abstract class Image {
        this.height = height;
        this.pixels = new Color[height][width];
     }
+
     public Image(){
         this(0,0);
     }
+
     public int getWidth(){
         return width;
     }
+
     public int getHeight(){
         return height;
     }
+
     public Color[][] getPixels(){
         return pixels;
     }
+
     public void setWidth(int width){
         this.width = width;
     }
+
     public void setHeight(int height){
         this.height = height;
     }
+
     public void setPixels(Color[][] pixels){
         this.pixels = pixels;
     }
+
+
+
 
 
 
