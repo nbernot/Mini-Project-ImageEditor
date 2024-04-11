@@ -2,42 +2,42 @@ import java.awt.*;
 import java.util.Scanner;
 
 // trying to push instead
-abstract class Image implements Writable{
+abstract class Image implements Writable {
     private int width;
     private int height;
     private Color[][] colors;
 
     public Image(int width, int height) {
-       this.width = width;
-       this.height = height;
-       this.colors = new Color[height][width];
+        this.width = width;
+        this.height = height;
+        this.colors = new Color[height][width];
     }
 
-    public Image(){
-        this(0,0);
+    public Image() {
+        this(0, 0);
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return width;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return height;
     }
 
-    public Color[][] getColors(){
+    public Color[][] getColors() {
         return colors;
     }
 
-    public void setWidth(int width){
+    public void setWidth(int width) {
         this.width = width;
     }
 
-    public void setHeight(int height){
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public void setColors(Color[][] pixels){
+    public void setColors(Color[][] pixels) {
         this.colors = pixels;
     }
 
