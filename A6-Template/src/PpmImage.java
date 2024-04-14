@@ -20,7 +20,10 @@ class PpmImage extends Image {
         readImage(filename);
     }
 
-
+    /**
+     * Reads the image and gets data for processing
+     * @param filename file name
+     */
     void readImage(String filename){
         try {
             // OPEN the scanner. CATCH THE EXPECTION! DO NOT
@@ -49,6 +52,10 @@ class PpmImage extends Image {
         }
     }
 
+    /**
+     * Designates the output for the new updated image
+     * @param filename filename
+     */
     @Override
     public void output(String filename) {
         try (PrintWriter write = new PrintWriter(filename)) {
@@ -64,9 +71,6 @@ class PpmImage extends Image {
             System.err.println("Error writing to file: " + filename);
         }
     }
-
-
-
 
 }
 
