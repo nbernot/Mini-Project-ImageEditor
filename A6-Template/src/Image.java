@@ -5,12 +5,12 @@ import java.util.Scanner;
 abstract class Image implements Writable{
     private int width;
     private int height;
-    private Color[][] pixels;
+    private Color[][] colors;
 
     public Image(int width, int height) {
        this.width = width;
        this.height = height;
-       this.pixels = new Color[height][width];
+       this.colors = new Color[height][width];
     }
 
     public Image(){
@@ -25,8 +25,8 @@ abstract class Image implements Writable{
         return height;
     }
 
-    public Color[][] getPixels(){
-        return pixels;
+    public Color[][] getColors(){
+        return colors;
     }
 
     public void setWidth(int width){
@@ -37,8 +37,8 @@ abstract class Image implements Writable{
         this.height = height;
     }
 
-    public void setPixels(Color[][] pixels){
-        this.pixels = pixels;
+    public void setColors(Color[][] pixels){
+        this.colors = pixels;
     }
 
 
