@@ -38,26 +38,20 @@ class WeatherForecast {
                 String properResponse;
                 properResponse = reader.lines().collect(Collectors.joining());
                 reader.close();
-
                 JsonElement jsonFE = JsonParser.parseString(properResponse);
                 JsonObject jsonFO = jsonFE.getAsJsonObject();
-                JsonArray timeHolder = jsonFO.get("hourly").getAsJsonObject().get("time").getAsJsonArray();
-                JsonArray tempHolder = jsonFO.get("hourly").getAsJsonObject().get("temperature").getAsJsonArray();
-
-                System.out.println(timeHolder);
+                JsonObject hourlyObject = jsonFO.getAsJsonObject("hourly");
+                JsonArray timeHolder = hourlyObject.getAsJsonArray("time");
+                JsonArray tempHolder = hourlyObject.getAsJsonArray("temperature_2m");
 
                 System.out.println("Bloomington 7 Day Forecast in Fahrenheit: ");
-                for (int i = 0; i < timeHolder.size(); i++){
-                    String date = timeHolder.get(i).getAsJsonObject().get("date").getAsString();
-                    System.out.println("Forecast for " + date +":");
-                    JsonArray temperatures = tempHolder.get(i).getAsJsonArray();
-                    for (int j = 0; j < temperatures.size(); j++){
-                        JsonObject tempOb = temperatures.get(j).getAsJsonObject();
-                        String time = tempOb.get("time").getAsString();
-                        double tempF = tempOb.get("tempF").getAsDouble();
-                        System.out.println(time + ": " + tempF + "°F");
-                    }
+                for (int i = 0; i < timeHolder.size(); i++) {
+                    String date = timeHolder.get(i).getAsString();
+                    System.out.println("Forecast for " + date + ":");
+                    double tempF = tempHolder.get(i).getAsDouble();
+                    System.out.println("Temperature: " + tempF + "°F");
                 }
+
             }
             else throw new IOException("HTTP request failed: " + responseCode);
 
