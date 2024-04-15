@@ -1,14 +1,25 @@
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
-class ImageOperations {
+class ImageOperations extends PpmImage {
+
+    public ImageOperations(int width, int height) {
+        super(width, height);
+    }
+
+    public ImageOperations(String filename) {
+        super(filename);
+    }
 
     public static void main(String[] args) {
-        // TODO.
+
     }
 
 
     public static Image zeroRed(Image img){
-        // TODO.
         Color[][] holder = img.getColors();
         for (int i = 0; i <img.getHeight(); i++){
             for (int j = 0; j<img.getWidth(); j++){
