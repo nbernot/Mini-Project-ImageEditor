@@ -41,8 +41,8 @@ class WeatherForecast {
 
                 JsonElement jsonFE = JsonParser.parseString(properResponse);
                 JsonObject jsonFO = jsonFE.getAsJsonObject();
-                JsonArray timeHolder = jsonFO.getAsJsonArray("times");
-                JsonArray tempHolder = jsonFO.getAsJsonArray("temperatures");
+                JsonArray timeHolder = jsonFO.get("hourly").getAsJsonObject().get("time").getAsJsonArray();
+                JsonArray tempHolder = jsonFO.get("hourly").getAsJsonObject().get("temperature").getAsJsonArray();
 
                 System.out.println(timeHolder);
 
