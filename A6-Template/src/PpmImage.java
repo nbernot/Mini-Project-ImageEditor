@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-class PpmImage extends Image {
+public class PpmImage extends Image {
     private int width;
     private int height;
     private Color[][] color;

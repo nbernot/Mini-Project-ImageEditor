@@ -4,22 +4,36 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-class ImageOperations extends PpmImage {
-
-    public ImageOperations(int width, int height) {
-        super(width, height);
-    }
-
-    public ImageOperations(String filename) {
-        super(filename);
-    }
+public class ImageOperations {
 
     public static void main(String[] args) {
+        switch(args[0]){
+            case "--zerored":
+                zerored(new PpmImage(args[1])).output(args[2]);
+                break;
+            case "--grayscale":
+                grayscale(new PpmImage(args[1])).output(args[2]);
+                break;
+            case "--invert":
+                invert(new PpmImage(args[1])).output(args[2]);
+                break;
+            case "--crop":
+                crop(new PpmImage(args[5]),Integer.parseInt(args[1]),Integer.parseInt(args[2]),Integer.parseInt(args[3]),Integer.parseInt(args[4])).output(args[6]);
+                break;
+            case "--mirror":
+                mirror(new PpmImage(args[2]),args[1]).output(args[3]);
+                break;
+            case "repeat":
+                repeat(new PpmImage(args[3]),Integer.parseInt(args[2]),args[1]).output(args[4]);
+                break;
+            default:
+                System.err.println("Not a Command");
 
+        }
     }
 
 
-    public static Image zeroRed(Image img){
+    public static Image zerored(Image img){
         Color[][] holder = img.getColors();
         for (int i = 0; i <img.getHeight(); i++){
             for (int j = 0; j<img.getWidth(); j++){
