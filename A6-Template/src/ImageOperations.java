@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Objects;
 
 public class ImageOperations {
 
@@ -23,13 +24,14 @@ public class ImageOperations {
             case "--mirror":
                 mirror(new PpmImage(args[2]),args[1]).output(args[3]);
                 break;
-            case "repeat":
+            case "--repeat":
                 repeat(new PpmImage(args[3]),Integer.parseInt(args[2]),args[1]).output(args[4]);
                 break;
             default:
                 System.err.println("Not a Command");
         }
     }
+
 
     /**
      * Removes the red channel from the colors of the image
@@ -44,6 +46,7 @@ public class ImageOperations {
                 holder[i][j] = new Color(0,original.getGreen(),original.getBlue());
             }
         }
+        img.setColors(holder);
         return img;
     }
 
@@ -62,6 +65,7 @@ public class ImageOperations {
                 holder[i][j] = new Color(grayscale,grayscale,grayscale);
             }
         }
+        img.setColors(holder);
         return img;
     }
 
@@ -79,6 +83,7 @@ public class ImageOperations {
                 holder[i][j] = new Color(255-original.getRed(),255 -original.getGreen(),255-original.getBlue());
             }
         }
+        img.setColors(holder);
         return img;
     }
 
@@ -94,16 +99,13 @@ public class ImageOperations {
     public static Image crop(Image img, int x1, int y1, int w, int h){
         Image croppedImage = new PpmImage(w, h);
         Color[][] sourceColors = img.getColors();
-        Color[][] croppedColors = croppedImage.getColors();
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
-                if (i + y1 < img.getHeight() && j + x1 < img.getWidth()) {
-                    croppedColors[i][j] = sourceColors[i + y1][j + x1];
-                } else {
-                    croppedColors[i][j] = new Color(0, 0, 0);
-                }
+        Color[][] croppedColor = new Color[h][w];
+        for (int i = 0; i < w; i++) {
+            for (int j = 0; j < h; j++) {
+                croppedColor[j][i] = sourceColors[x1+j][y1+i];
             }
         }
+        croppedImage.setColors(croppedColor);
         return croppedImage;
     }
 
@@ -140,24 +142,52 @@ public class ImageOperations {
      * @return new repeated img
      */
     public static Image repeat(Image img, int n, String dir){
-        int width = img.getWidth();
-        int height = img.getHeight();
-        if ("H".equals(dir)) {
-            width *= n;
-        } else if ("V".equals(dir)) {
-            height *= n;
+        if(n==1){
+            return img;
+        } else if (Objects.equals(dir, "H")) {
+            return horiz(img,n);
         }
-        Image repeatImage = new PpmImage(width, height);
-        Color[][] sourceColors = img.getColors();
-        Color[][] repeatedColors = repeatImage.getColors();
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                int sourceJ = j % img.getWidth();
-                int sourceI = i % img.getHeight();
-                repeatedColors[i][j] = sourceColors[sourceI][sourceJ];
+        else{
+            return vert(img,n);
+        }
+    }
+
+    private static Image vert(Image img, int n){
+        Image repeated = new PpmImage(img.getWidth(), img.getHeight()*n);
+
+        Color[][] imageColor = img.getColors();
+        Color[][] repColor = new Color[img.getHeight()*n][img.getWidth()];
+
+        int counter =0;
+        while(counter <repColor.length){
+            for(int i = 0;i<imageColor.length;i++){
+                for(int j = 0; j<imageColor[0].length;j++){
+                    repColor[counter+i][j] = imageColor[i][j];
+                }
             }
+            counter += imageColor.length;
         }
-        return repeatImage;
+
+        repeated.setColors(repColor);
+        return repeated;
+    }
+    private static Image horiz(Image img, int n){
+        Image repeated = new PpmImage(img.getWidth()*n, img.getHeight());
+
+        Color[][] imageColor = img.getColors();
+        Color[][] repColor = new Color[img.getHeight()][img.getWidth()*n];
+
+        int counter = 0;
+        while (counter<repColor.length){
+            for(int i = 0; i<imageColor.length;i++){
+                for(int j = 0; j<imageColor[0].length;j++){
+                    repColor[i][counter+j] = imageColor[i][j];
+                }
+            }
+            counter+= imageColor[0].length;
+        }
+        repeated.setColors(repColor);
+        return repeated;
     }
 }
 
