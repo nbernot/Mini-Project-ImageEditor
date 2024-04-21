@@ -5,20 +5,26 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-class PpmImage extends Image {
+public class PpmImage extends Image {
+    private int width;
+    private int height;
+    private Color[][] color;
 
 
     public PpmImage(int width, int height) {
         super(width, height);
     }
 
-    public PpmImage(String filename) {
+    public PpmImage(String filename){
         super();
         readImage(filename);
     }
 
-
-    void readImage(String filename) {
+    /**
+     * Reads the image and gets data for processing
+     * @param filename file name
+     */
+    void readImage(String filename){
         try {
             // OPEN the scanner. CATCH THE EXPECTION! DO NOT
             // SIMPLY MARK THE METHOD AS "throws" IOEXception"
@@ -36,15 +42,20 @@ class PpmImage extends Image {
                     int red = sc.nextInt();
                     int green = sc.nextInt();
                     int blue = sc.nextInt();
-                    this.getColors()[i][j] = new Color(red, green, blue);
+                    this.getColors()[i][j] = new Color(red,green,blue);
                 }
             }
             sc.close();
-        } catch (IOException e) {
+        }
+        catch(IOException e){
             e.getMessage();
         }
     }
 
+    /**
+     * Designates the output for the new updated image
+     * @param filename filename
+     */
     @Override
     public void output(String filename) {
         try (PrintWriter write = new PrintWriter(filename)) {
@@ -61,7 +72,5 @@ class PpmImage extends Image {
         }
     }
 
-
 }
-
 
