@@ -43,7 +43,7 @@ public class ImageOperations {
         for (int i = 0; i < img.getHeight(); i++){
             for (int j = 0; j < img.getWidth(); j++){
                 Color original = holder[i][j];
-                holder[i][j] = new Color(0,original.getGreen(),original.getBlue());
+                holder[i][j] = new Color(0, original.getGreen(), original.getBlue());
             }
         }
         img.setColors(holder);

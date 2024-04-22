@@ -36,8 +36,8 @@ public class PpmImage extends Image {
             this.setWidth(width);
             this.setHeight(height);
             this.setColors(new Color[width][height]);
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < height; j++) {
+            for (int i = 0; i < height; i++) {
+                for (int j = 0; j < width; j++) {
                     // Populate the pixels array
                     int red = sc.nextInt();
                     int green = sc.nextInt();
