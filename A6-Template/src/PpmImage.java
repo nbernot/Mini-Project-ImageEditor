@@ -33,6 +33,7 @@ public class PpmImage extends Image {
             sc.nextLine();
             int width = sc.nextInt();
             int height = sc.nextInt();
+            System.out.println("Read image dimensions: " + width + " x " + height);
             this.setWidth(width);
             this.setHeight(height);
             this.setColors(new Color[width][height]);
@@ -60,6 +61,7 @@ public class PpmImage extends Image {
     public void output(String filename) {
         try (PrintWriter write = new PrintWriter(filename)) {
             write.println("P3");
+            System.out.println("Writing image dimensions: " + getWidth() + " x " + getHeight());
             write.println(getWidth() + " " + getHeight());
             write.println(255);
             for (Color[] row : getColors()) {

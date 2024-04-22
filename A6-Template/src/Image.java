@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.Scanner;
 
 // trying to push instead
 abstract class Image implements Writable {
