@@ -156,6 +156,12 @@ public class ImageOperations {
         }
     }
 
+    /**
+     * Helper method that repeats an image vertically
+     * @param img original Image
+     * @param n number of repeats
+     * @return new Image
+     */
     private static Image vert(Image img, int n){
         Image repeated = new PpmImage(img.getWidth(), img.getHeight()*n);
 
@@ -176,6 +182,12 @@ public class ImageOperations {
         return repeated;
     }
 
+    /**
+     * Helper method that repeats an image horizontally
+     * @param img original Image
+     * @param n number of repeats
+     * @return new Image
+     */
     private static Image horiz(Image img, int n){
         Image repeated = new PpmImage(img.getWidth()*n, img.getHeight());
 
@@ -195,4 +207,3 @@ public class ImageOperations {
         return repeated;
     }
 }
-
